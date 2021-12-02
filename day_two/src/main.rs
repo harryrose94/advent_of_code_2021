@@ -1,57 +1,66 @@
 use std::fs;
 
-fn problem_one(horizontal_pos_one: &mut u32, depth_one: &mut u32, dir: &str, x: u32) {
-    if dir == "forward" {
-        *horizontal_pos_one += x;
-    } else {
-        if dir == "down" {
-            *depth_one += x;
-        } else {
-            *depth_one -= x;
-        }
+struct Coords {
+    horizontal: u32,
+    depth: u32,
+    aim: u32,
+}
+
+fn problem_one(coords: &mut Coords, line: &str) {
+    let line_vec: Vec<&str> = line.split(" ").collect();
+
+    let dir: &str = line_vec[0];
+    let x: u32 = line_vec[1].parse::<u32>().expect("error");
+
+    match &dir[..] {
+        "forward" => coords.horizontal += x,
+        "up" => coords.depth -= x,
+        "down" => coords.depth += x,
+        _ => println!("error"),
     }
 }
 
-fn problem_two(
-    horizontal_pos_two: &mut u32,
-    depth_two: &mut u32,
-    aim: &mut u32,
-    dir: &str,
-    x: u32,
-) {
-    if dir == "down" {
-        *aim += x;
-    } else if dir == "up" {
-        *aim -= x;
-    } else {
-        *horizontal_pos_two += x;
-        *depth_two += *aim * x;
+fn problem_two(coords: &mut Coords, line: &str) {
+    let line_vec: Vec<&str> = line.split(" ").collect();
+
+    let dir: &str = line_vec[0];
+    let x: u32 = line_vec[1].parse::<u32>().expect("error");
+
+    match &dir[..] {
+        "forward" => {
+            coords.horizontal += x;
+            coords.depth += coords.aim * x;
+        }
+        "up" => coords.aim -= x,
+        "down" => coords.aim += x,
+        _ => println!("error"),
     }
 }
 
 fn main() {
-    // --snip--
     let filename: &str = "/Users/harryrose/Projects/advent_of_code_2021/data/day_two.txt";
     let contents = fs::read_to_string(filename).expect("Something went wrong reading the file");
 
-    let mut horizontal_pos_one: u32 = 0;
-    let mut depth_one: u32 = 0;
+    let mut coords_one = Coords {
+        horizontal: 0,
+        depth: 0,
+        aim: 0,
+    };
 
-    let mut horizontal_pos_two: u32 = 0;
-    let mut depth_two: u32 = 0;
-    let mut aim: u32 = 0;
+    let mut coords_two = Coords {
+        horizontal: 0,
+        depth: 0,
+        aim: 0,
+    };
 
     for line in contents.lines() {
-        let linevec: Vec<&str> = line.split_whitespace().collect();
-        let dir = linevec[0];
-        let x: u32 = linevec[1].parse().expect("Not a num");
-
-        problem_one(&mut horizontal_pos_one, &mut depth_one, dir, x);
-        problem_two(&mut horizontal_pos_two, &mut depth_two, &mut aim, dir, x);
+        problem_one(&mut coords_one, &line);
+        problem_two(&mut coords_two, &line);
     }
-    let res_one = horizontal_pos_one * depth_one;
+
+    let res_one = coords_one.horizontal * coords_one.depth;
     println!("{}", res_one);
 
-    let res_two = horizontal_pos_two * depth_two;
+    let res_two = coords_two.horizontal * coords_two.depth;
     println!("{}", res_two);
 }
