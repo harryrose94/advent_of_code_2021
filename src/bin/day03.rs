@@ -91,8 +91,8 @@ fn problem_two(lines: &[&str]) -> usize {
     oxy_int * carbon_int
 }
 
-fn main() {
-    let filename: &str = "/Users/harryrose/Projects/advent_of_code_2021/data/day_three.txt";
+pub fn main() {
+    let filename: &str = "/Users/harryrose/Projects/advent_of_code_2021/data/day03.txt";
     let contents = fs::read_to_string(filename).expect("Something went wrong reading the file");
 
     let lines: Vec<&str> = contents.split("\n").collect();

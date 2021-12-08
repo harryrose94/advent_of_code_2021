@@ -37,8 +37,8 @@ fn problem_two(coords: &mut Coords, line: &str) {
     }
 }
 
-fn main() {
-    let filename: &str = "/Users/harryrose/Projects/advent_of_code_2021/data/day_two.txt";
+pub fn main() {
+    let filename: &str = "/Users/harryrose/Projects/advent_of_code_2021/data/day02.txt";
     let contents = fs::read_to_string(filename).expect("Something went wrong reading the file");
 
     let mut coords_one = Coords {

@@ -45,8 +45,8 @@ fn problem_two(nums: &[u32]) -> u32 {
     num_increases
 }
 
-fn main() {
-    let filename: &str = "/Users/harryrose/Projects/advent_of_code_2021/data/day_one.txt";
+pub fn main() {
+    let filename: &str = "/Users/harryrose/Projects/advent_of_code_2021/data/day01.txt";
     let nums: Vec<u32> = load_from_file(filename);
 
     println!("{}", problem_one(&nums));
