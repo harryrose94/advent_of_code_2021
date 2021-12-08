@@ -10,7 +10,7 @@ fn cost_p2(x: i64, i: i64) -> i64 {
     y * (y + 1) / 2
 }
 
-fn main() {
+pub fn main() {
     let filename: &str = "/Users/harryrose/Projects/advent_of_code_2021/data/day07.txt";
     let contents = fs::read_to_string(filename).expect("Something went wrong reading the file");
 
@@ -21,8 +21,6 @@ fn main() {
 
     let min_val: i64 = *stack.iter().min().unwrap_or(&0);
     let max_val: i64 = *stack.iter().max().unwrap_or(&0);
-    println!("{}", min_val);
-    println!("{}", max_val);
 
     let mut min_so_far = i64::MAX;
     for i in min_val..(max_val + 1) {
