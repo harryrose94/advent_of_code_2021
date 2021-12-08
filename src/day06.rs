@@ -1,8 +1,7 @@
 use std::collections::HashMap;
 use std::fs;
 
-pub fn main() {
-    let filename: &str = "/Users/harryrose/Projects/advent_of_code_2021/data/day06.txt";
+pub fn main(filename: &str) {
     let contents = fs::read_to_string(filename).expect("Something went wrong reading the file");
 
     let stack: Vec<u64> = contents
